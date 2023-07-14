@@ -1,5 +1,5 @@
 import logging
-from telegram import Update
+from telegram import Update, InputMediaPhoto
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
 # Set up logging
@@ -9,11 +9,13 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 # Define the command handler function
 def multumim_command(update: Update, context: CallbackContext):
     # Send a message
-    update.message.reply_text('Multumim Cristi pentru serviciul tau!')
+    # update.message.reply_text('Multumim Cristi pentru serviciul tau!')
 
     # Send a picture
     photo_url = 'https://github.com/alexandruavram-rusu/MusonBoot/blob/main/pictures/multumim_cristi.jpg?raw=true'
-    update.message.reply_photo(photo_url)
+    caption = 'Multumim Cristi pentru serviciul tau!'
+    media = InputMediaPhoto(photo_url, caption=caption)
+    update.message.reply_media_group([media])
 
 def main():
     # Create an Updater object with your bot's token
