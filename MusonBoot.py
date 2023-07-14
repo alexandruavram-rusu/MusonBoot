@@ -1,44 +1,31 @@
 import logging
-from aiogram import Bot, Dispatcher, types
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from triggers import triggers  # Import the triggers from the separate file
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
-TOKEN = '6246555581:AAGB4Fb8B1n9656SbBO8PZ8a41smVbNbqN8'
-BOT_USERNAME = '@MusonulBot'
+# Set up logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                     level=logging.INFO)
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
+# Define the command handler function
+def multumim_command(update: Update, context: CallbackContext):
+    # Send a message
+    update.message.reply_text('Multumim Cristi pentru serviciul tau!')
 
-# Create a bot instance
-bot = Bot(token=TOKEN)
+    # Send a picture
+    photo_url = 'https://github.com/alexandruavram-rusu/MusonBoot/blob/main/pictures/multumim_cristi.jpg'
+    update.message.reply_photo(photo_url)
 
-# Create a dispatcher instance
-storage = MemoryStorage()
-dispatcher = Dispatcher(bot, storage=storage)
+def main():
+    # Create an Updater object with your bot's token
+    updater = Updater('6246555581:AAGB4Fb8B1n9656SbBO8PZ8a41smVbNbqN8')
 
-@dispatcher.message_handler(content_types=types.ContentTypes.TEXT)
-async def message_handler(message: types.Message):
-    text = message.text.lower()
-    chat_id = message.chat.id
+    updater.dispatcher.add_handler(CommandHandler('multumim', multumim_command))
 
-    for trigger, data in triggers.items():
-        if isinstance(trigger, list):
-            if all(t in text for t in trigger):
-                image_path = data['image_path']
-                caption = data['caption']
-                with open(image_path, 'rb') as photo:
-                    await bot.send_photo(chat_id=chat_id, photo=photo, caption=caption)
-                break
+    # Start the bot
+    updater.start_polling()
 
-async def startup(dp):
-    await bot.send_message(chat_id='@channel', text='Bot started!')
+    # Run the bot until you press Ctrl-C
+    updater.idle()
 
-async def shutdown(dp):
-    await bot.send_message(chat_id='@channel', text='Bot stopped!')
-    await dp.storage.close()
-    await dp.storage.wait_closed()
-
-# Start the bot
 if __name__ == '__main__':
-    from aiogram import executor
-    executor.start_polling(dispatcher, on_startup=startup, on_shutdown=shutdown)
+    main()
