@@ -20,7 +20,7 @@ def multumim_command(update: Update, context: CallbackContext):
 
 def inspirational_command(update: Update, context: CallbackContext):
     photo_url = 'https://i.imgur.com/iryNRGD.jpg'
-    caption = 'TRUE LEADERS'
+    caption = 'TRUE WORDS'
     media = InputMediaPhoto(photo_url, caption=caption)
     update.message.reply_media_group([media])
     
