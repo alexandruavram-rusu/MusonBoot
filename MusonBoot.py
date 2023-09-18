@@ -18,7 +18,7 @@ def multumim_command(update: Update, context: CallbackContext):
     update.message.reply_media_group([media])
     
 
-def inspirational(update: Update, context: CallbackContext):
+def inspirational_command(update: Update, context: CallbackContext):
     photo_url = 'https://i.imgur.com/03l3sLO.jpg'
     caption = 'TRUE LEADERS'
     media = InputMediaPhoto(photo_url, caption=caption)
@@ -30,7 +30,7 @@ def main():
     updater = Updater('6246555581:AAGB4Fb8B1n9656SbBO8PZ8a41smVbNbqN8')
 
     updater.dispatcher.add_handler(CommandHandler('multumim', multumim_command))
-    updater.dispatcher.add_handler(CommandHandler('inspirational', multumim_command))
+    updater.dispatcher.add_handler(CommandHandler('inspirational', inspirational_command))
 
     # Start the bot
     updater.start_polling()
