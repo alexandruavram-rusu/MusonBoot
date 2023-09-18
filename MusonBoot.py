@@ -24,6 +24,13 @@ def inspirational_command(update: Update, context: CallbackContext):
     media = InputMediaPhoto(photo_url, caption=caption)
     update.message.reply_media_group([media])
     
+def nepotu_command(update: Update, context: CallbackContext):
+    photo_url = 'https://i.imgur.com/N5hBCiC.jpg'
+    caption = 'Where nepotu?'
+    media = InputMediaPhoto(photo_url, caption=caption)
+    update.message.reply_media_group([media])
+    
+    
 
 def main():
     # Create an Updater object with your bot's token
@@ -31,6 +38,7 @@ def main():
 
     updater.dispatcher.add_handler(CommandHandler('multumim', multumim_command))
     updater.dispatcher.add_handler(CommandHandler('inspirational', inspirational_command))
+    updater.dispatcher.add_handler(CommandHandler('nepotu', nepotu_command))
 
     # Start the bot
     updater.start_polling()
