@@ -12,7 +12,7 @@ def multumim_command(update: Update, context: CallbackContext):
     # update.message.reply_text('Multumim Cristi pentru serviciul tau!')
 
     # Send a picture
-    photo_url = 'https://github.com/alexandruavram-rusu/MusonBoot/blob/main/pictures/multumim_cristi.jpg?raw=true'
+    photo_url = 'https://i.imgur.com/AsrxH00.jpg'
     caption = 'Multumim Cristi pentru serviciul tau!'
     media = InputMediaPhoto(photo_url, caption=caption)
     update.message.reply_media_group([media])
