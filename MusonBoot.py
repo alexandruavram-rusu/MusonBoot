@@ -30,6 +30,11 @@ def nepotu_command(update: Update, context: CallbackContext):
     media = InputMediaPhoto(photo_url, caption=caption)
     update.message.reply_media_group([media])
     
+def relansare_economica_command(update: Update, conext: CallbackContext):
+    photo_url = 'https://i.imgur.com/vRpmIsl.jpg'
+    caption = 'Planul de relansare economica'
+    media = InputMediaPhoto(photo_url, caption=caption)
+    update.message.reply_media_group([media])
     
 
 def main():
@@ -39,6 +44,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('multumim', multumim_command))
     updater.dispatcher.add_handler(CommandHandler('inspirational', inspirational_command))
     updater.dispatcher.add_handler(CommandHandler('nepotu', nepotu_command))
+    updater.dispatcher.add_handler(CommandHandler('relansare_economica', relansare_economica_command))
 
     # Start the bot
     updater.start_polling()
